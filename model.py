@@ -261,6 +261,12 @@ class DCGAN(object):
             feed_dict={ self.z: batch_z, self.y:batch_labels })
           self.writer.add_summary(summary_str, counter)
           
+          # try to run G thrid 
+          _, summary_str = self.sess.run([g_optim, self.g_sum],
+            feed_dict={ self.z: batch_z, self.y:batch_labels })
+          self.writer.add_summary(summary_str, counter)
+          
+          
           errD_fake = self.d_loss_fake.eval({
               self.z: batch_z, 
               self.y:batch_labels
